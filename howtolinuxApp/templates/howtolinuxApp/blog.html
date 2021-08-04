@@ -1,0 +1,50 @@
+<!--PÁGINA INICIAL-->
+
+{% extends 'howtolinuxApp/base.html' %}
+
+{% block jumbotron %}
+    <div class="jumbotron jumbotron-fluid bg-theme-0-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center text-theme-0-0">
+                    <h1 class="display-2">HowtolinuX</h1>
+                    <p class="lead display-4">Algumas soluções e tecnologias envolvendo o mundo Linux</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <form action="/blog/" method="GET">
+        <div class="input-group mb-3">
+            <input name="search" type="text" class="form-control" placeholder="Pesquisar" aria-label="Usuário" aria-describedby="basic-addon1">
+          </div>
+    </form>
+
+    <hr>
+    <div class="row ">
+        <div class="col-sm-12">
+            <div class="card-deck">
+                {% for post in post_list %}
+                    <div class="card mb-4" style="min-width: 18rem;"> <!--CARD DECK ARRUMADO-->
+                        <a href="{{ post.get_post_url }}" style="text-decoration:none" class="text-theme-0-1">
+                            <img class="card-img-top" src="{{ post.cover.url }}" alt="Imagem de capa do card">
+                            <div class="card-body text-theme-0-1">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.content | truncatechars:120 | safe }}</p>
+                            </div>
+                            <div class="card-footer bg-theme-0-3">
+                                <small class="text-muted font-italic">{{ post.updated }}</small>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mb-4" style="border-bottom: 1px solid #2d3436;"></div>
+                {% endfor %}
+            </div> 
+        </div>      
+    </div>
+    <hr class="mt-1">
+{% endblock %}
+
